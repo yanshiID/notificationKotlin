@@ -1,12 +1,15 @@
 package yanshi.NotificationKT
 
+//  Converted from java to kotlin by yanshiID from codinginflow.com
 //  https://www.youtube.com/playlist?list=PLrnPJCHvNZuCN52QwGu7YTSLIMrjCF0gM
 
 import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.support.v4.media.session.MediaSessionCompat
 import android.view.View
@@ -23,11 +26,11 @@ import yanshi.NotificationKT.App.statified.CHANNEL_3_ID
 import yanshi.NotificationKT.App.statified.CHANNEL_4_ID
 import yanshi.NotificationKT.App.statified.CHANNEL_5_ID
 import yanshi.NotificationKT.MainActivity.MES.MESSAGES
+import yanshi.NotificationKT.MainActivity.MES.notificationManager
+import yanshi.NotificationKT.MainActivity.MES.sendOnChannel5Notification
 import yanshi.NotificationKT.Message.aob.Messages
 
 class MainActivity : AppCompatActivity() {
-
-    lateinit var notificationManager: NotificationManagerCompat
 
     var editTextTitle: EditText?=null
     var editTextMessage: EditText?=null
@@ -36,7 +39,74 @@ class MainActivity : AppCompatActivity() {
 
     object MES{
 
+        lateinit var notificationManager: NotificationManagerCompat
+
         val MESSAGES : MutableList<Message> = ArrayList()
+
+//        MessagingStyle : https://www.youtube.com/watch?v=DsFYPTnCbs8&list=PLrnPJCHvNZuCN52QwGu7YTSLIMrjCF0gM&index=5
+//    error on looping
+        fun sendOnChannel5Notification(context: Context) {
+
+            val activityIntent = Intent(context, MainActivity::class.java)
+            val contentIntent : PendingIntent = PendingIntent.getActivity(context, 0, activityIntent, 0)
+
+            val remoteInput = RemoteInput.Builder("key_text_reply")
+                .setLabel("Your answer...")
+                .build()
+
+            val replyIntent : Intent
+            var replyPendingIntent : PendingIntent? = null
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                replyIntent = Intent(context, DirectReplyReceiver::class.java)
+                replyPendingIntent = PendingIntent.getBroadcast(context, 0, replyIntent, 0)
+            } else {
+                // start chat activity instead (PendingIntent.getActivity)
+                // cancel notification with NotificationManagerCompat.cancel(id)
+            }
+
+            val replyAction = NotificationCompat.Action.Builder(
+                R.drawable.ic_reply,
+                "Reply",
+                replyPendingIntent
+            ).addRemoteInput(remoteInput).build()
+
+            // Person added in API level 28
+            val person = Person.Builder()
+                .setIcon(IconCompat.createWithResource(context, R.drawable.ic_person))
+                .setName("Me")
+                .build()
+
+            val messagingStyle = NotificationCompat.MessagingStyle("Me")  // Deprecated
+//        val messagingStyle = NotificationCompat.MessagingStyle(person)
+            messagingStyle.isGroupConversation = true
+            messagingStyle.conversationTitle = "Group Chat"
+
+            for (chatMessage in MESSAGES) {
+                val notificationMessage =
+                    NotificationCompat.MessagingStyle.Message(
+                        chatMessage.getText(),
+                        chatMessage.getTimeStamp()!!,
+                        chatMessage.getSender()
+                    )
+                messagingStyle.addMessage(notificationMessage)
+            }
+
+            val notification = NotificationCompat.Builder(context, CHANNEL_5_ID)
+                .setSmallIcon(R.drawable.ic_one)
+                .setStyle(messagingStyle)
+                .addAction(replyAction)
+                .setColor(Color.BLUE)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                .setContentIntent(contentIntent)
+                .setAutoCancel(true)
+                .setOnlyAlertOnce(true)
+                .build()
+
+            notificationManager.notify(1, notification)
+
+        }
 
     }
 
@@ -56,7 +126,7 @@ class MainActivity : AppCompatActivity() {
         MESSAGES.add(Messages("Hi!", "Jenny"))
     }
 
-//        BigTextStyle
+//        BigTextStyle : https://www.youtube.com/watch?v=lVzhzi2e_Zw&list=PLrnPJCHvNZuCN52QwGu7YTSLIMrjCF0gM&index=3
     fun sendOnChannel1(v: View) {
 
         val title: String = editTextTitle?.text.toString()
@@ -95,7 +165,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-//      MediaStyle
+//      MediaStyle : https://www.youtube.com/watch?v=s0Q2QKZ4OP8&list=PLrnPJCHvNZuCN52QwGu7YTSLIMrjCF0gM&index=4
     fun sendOnChannel2(v: View) {
 
         val title: String = editTextTitle?.text.toString()
@@ -124,7 +194,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-//        BigPictureStyle
+//        BigPictureStyle : https://www.youtube.com/watch?v=s0Q2QKZ4OP8&list=PLrnPJCHvNZuCN52QwGu7YTSLIMrjCF0gM&index=4
     fun sendOnChannel3(v: View) {
 
         val title: String = editTextTitle?.text.toString()
@@ -155,7 +225,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-//      InboxStyle
+//      InboxStyle : https://www.youtube.com/watch?v=lVzhzi2e_Zw&list=PLrnPJCHvNZuCN52QwGu7YTSLIMrjCF0gM&index=3
     fun sendOnChannel4(v: View) {
 
         val title: String = editTextTitle?.text.toString()
@@ -183,60 +253,8 @@ class MainActivity : AppCompatActivity() {
     }
 
 //        MessagingStyle
-    fun sendOnChannel5(v: View) {
-
-        val title: String = editTextTitle?.text.toString()
-        val message: String = editTextMessage?.text.toString()
-
-        val activityIntent = Intent(this, MainActivity::class.java)
-        val contentIntent : PendingIntent = PendingIntent.getActivity(this, 0, activityIntent, 0)
-
-        val remoteInput : RemoteInput = RemoteInput.Builder("key_text_reply")
-            .setLabel("Your answer...")
-            .build()
-
-        val replyIntent = Intent(this, DirectReplyReceiver::class.java)
-        val replyPendingIntent = PendingIntent.getBroadcast(this, 0, replyIntent, 0)
-
-        val replyAction = NotificationCompat.Action.Builder(
-            R.drawable.ic_reply,
-            "Reply",
-            replyPendingIntent
-        ).addRemoteInput(remoteInput).build()
-
-        // Person added in API level 28
-        val person = Person.Builder()
-            .setIcon(IconCompat.createWithResource(this, R.drawable.ic_person))
-            .setName("Me")
-            .build()
-
-        val messagingStyle = NotificationCompat.MessagingStyle("Me")  // Deprecated
-//        val messagingStyle = NotificationCompat.MessagingStyle(person)
-        messagingStyle.conversationTitle = "Group Chat"
-        messagingStyle.isGroupConversation
-
-        for (chatMessage in MESSAGES) {
-            val notificationMessage =
-            NotificationCompat.MessagingStyle.Message(
-                chatMessage.getText(),
-                chatMessage.getTimeStamp()!!,
-                chatMessage.getSender())
-            messagingStyle.addMessage(notificationMessage)
-        }
-
-        val notification = NotificationCompat.Builder(this, CHANNEL_5_ID)
-            .setSmallIcon(R.drawable.ic_one)
-            .setStyle(messagingStyle)
-            .addAction(replyAction)
-            .setColor(Color.BLUE)
-            .setPriority(NotificationCompat.PRIORITY_HIGH)
-            .setCategory(NotificationCompat.CATEGORY_MESSAGE)
-            .setContentIntent(contentIntent)
-            .setAutoCancel(true)
-            .setOnlyAlertOnce(true)
-            .build()
-
-        notificationManager.notify(1, notification)
-
+    fun sendOnChannel5 (v: View) {
+        sendOnChannel5Notification(this)
     }
+
 }

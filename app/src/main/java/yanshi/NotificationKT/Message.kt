@@ -14,8 +14,8 @@ class Message {
 
         fun Messages(text: CharSequence?, sender: CharSequence?): Message {
             this.text = text
-            timestamp = System.currentTimeMillis()
             this.sender = sender
+            timestamp = System.currentTimeMillis()
 
             return Message()
         }
