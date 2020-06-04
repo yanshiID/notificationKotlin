@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
         val MESSAGES : MutableList<Message> = ArrayList()
 
 //        MessagingStyle : https://www.youtube.com/watch?v=DsFYPTnCbs8&list=PLrnPJCHvNZuCN52QwGu7YTSLIMrjCF0gM&index=5
-//    error on looping
+//      error on looping
         fun sendOnChannel5Notification(context: Context) {
 
             val activityIntent = Intent(context, MainActivity::class.java)
