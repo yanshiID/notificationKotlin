@@ -24,31 +24,51 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="BigTextStyle"
+        android:textAlignment="textStart"
+        android:text="1. BigTextStyle"
         android:onClick="sendOnChannel1"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="MediaStyle"
+        android:text="2. MediaStyle"
+        android:textAlignment="textStart"
         android:onClick="sendOnChannel2"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="BigPictureStyle"
+        android:text="3. BigPictureStyle"
+        android:textAlignment="textStart"
         android:onClick="sendOnChannel3"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="InboxStyle"
+        android:text="4. InboxStyle"
+        android:textAlignment="textStart"
         android:onClick="sendOnChannel4"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="MessagingStyle"
+        android:text="5. MessagingStyle"
+        android:textAlignment="textStart"
+        android:textColor="#800000"
         android:onClick="sendOnChannel5"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="6. ProgressBar"
+        android:textAlignment="textStart"
+        android:onClick="sendOnChannel6"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="7. NotificationGroups"
+        android:textAlignment="textStart"
+        android:onClick="sendOnChannel7"/>
 
 </LinearLayout>

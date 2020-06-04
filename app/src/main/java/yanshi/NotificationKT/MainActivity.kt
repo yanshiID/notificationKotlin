@@ -3,6 +3,7 @@ package yanshi.NotificationKT
 //  Converted from java to kotlin by yanshiID from codinginflow.com
 //  https://www.youtube.com/playlist?list=PLrnPJCHvNZuCN52QwGu7YTSLIMrjCF0gM
 
+import android.app.Notification
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
@@ -11,6 +12,7 @@ import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.os.SystemClock
 import android.support.v4.media.session.MediaSessionCompat
 import android.view.View
 import android.widget.EditText
@@ -82,8 +84,8 @@ class MainActivity : AppCompatActivity() {
             messagingStyle.isGroupConversation = true
             messagingStyle.conversationTitle = "Group Chat"
 
-            for (chatMessage in MESSAGES) {
-                val notificationMessage =
+            for (chatMessage : Message in MESSAGES) {
+                val notificationMessage : NotificationCompat.MessagingStyle.Message =
                     NotificationCompat.MessagingStyle.Message(
                         chatMessage.getText(),
                         chatMessage.getTimeStamp()!!,
@@ -92,7 +94,7 @@ class MainActivity : AppCompatActivity() {
                 messagingStyle.addMessage(notificationMessage)
             }
 
-            val notification = NotificationCompat.Builder(context, CHANNEL_5_ID)
+            val notification : Notification = NotificationCompat.Builder(context, CHANNEL_5_ID)
                 .setSmallIcon(R.drawable.ic_one)
                 .setStyle(messagingStyle)
                 .addAction(replyAction)
@@ -252,9 +254,105 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-//        MessagingStyle
+//        MessagingStyle : https://www.youtube.com/watch?v=DsFYPTnCbs8&list=PLrnPJCHvNZuCN52QwGu7YTSLIMrjCF0gM&index=5
     fun sendOnChannel5 (v: View) {
         sendOnChannel5Notification(this)
+    }
+
+//        ProgressBar : https://www.youtube.com/watch?v=IHNC7OtOEI4&list=PLrnPJCHvNZuCN52QwGu7YTSLIMrjCF0gM&index=6
+    fun sendOnChannel6(v: View) {
+
+        val progressMax = 100
+
+        val notification = NotificationCompat.Builder(this, CHANNEL_2_ID)
+            .setSmallIcon(R.drawable.ic_six)
+            .setContentTitle("Download")
+            .setContentText("Download in progress")
+            .setPriority(NotificationCompat.PRIORITY_LOW)
+            .setOngoing(true)
+            .setOnlyAlertOnce(true)
+            // switch the indeterminate to /false/ to see the progress or keep it to see animation only
+            .setProgress(progressMax, 0, true)
+
+        notificationManager.notify(2, notification.build())
+
+        Thread(Runnable {
+            fun run() {
+                SystemClock.sleep(2000)
+                for (progress in 0 until progressMax step 20) {
+
+                    // /uncomment/ the bottom script to see the progress or keep it to see animation only
+
+//                    notification.setProgress(progressMax, progress, false)
+//                    notificationManager.notify(2, notification.build())
+                    SystemClock.sleep(1000)
+                }
+                notification.setContentText("Download Finished")
+                    .setProgress(0,0,false)
+                    .setOngoing(false)
+                notificationManager.notify(2, notification.build())
+            }
+            run()
+        }).start()
+
+    }
+
+//        NotificationGroups : https://www.youtube.com/watch?v=ZC4x4eEBU9U&list=PLrnPJCHvNZuCN52QwGu7YTSLIMrjCF0gM&index=7
+    fun sendOnChannel7(v: View) {
+
+        val group1 = "Group 1"
+        val title1 = "Title 1"
+        val message1 = "Message 1"
+        val title2 = "Title 2"
+        val message2 = "Message 2"
+
+        val notification1 = NotificationCompat.Builder(this, CHANNEL_2_ID)
+            .setSmallIcon(R.drawable.ic_7)
+            .setContentTitle(title1)
+            .setContentText(message1)
+            .setPriority(NotificationCompat.PRIORITY_LOW)
+            .setGroup(group1)
+            .build()
+
+        val notification2 = NotificationCompat.Builder(this, CHANNEL_2_ID)
+            .setSmallIcon(R.drawable.ic_7)
+            .setContentTitle(title2)
+            .setContentText(message2)
+            .setPriority(NotificationCompat.PRIORITY_LOW)
+            .setGroup(group1)
+            .build()
+
+        val summaryNotification = NotificationCompat.Builder(this, CHANNEL_2_ID)
+            .setSmallIcon(R.drawable.ic_reply)
+            .setStyle(NotificationCompat.InboxStyle()
+                .addLine("$title2 $message2")
+                .addLine("$title1 $message1")
+                .setBigContentTitle("2 new messages")
+                .setSummaryText("user@example.com"))
+            .setPriority(NotificationCompat.PRIORITY_LOW)
+            .setGroup(group1)
+            .setGroupAlertBehavior(NotificationCompat.GROUP_ALERT_CHILDREN)
+            .setGroupSummary(true)
+            .build()
+
+        SystemClock.sleep(2000)
+        notificationManager.notify(2, notification1)
+        SystemClock.sleep(2000)
+        notificationManager.notify(3, notification2)
+        SystemClock.sleep(2000)
+        notificationManager.notify(4, summaryNotification)
+
+//        val notification = NotificationCompat.Builder(this, CHANNEL_2_ID)
+//            .setSmallIcon(R.drawable.ic_7)
+//            .setContentTitle("Title")
+//            .setContentText("Message")
+//            .setPriority(NotificationCompat.PRIORITY_LOW)
+//            .build()
+
+//        for (i in 1..5) {
+//            SystemClock.sleep(2000)
+//            notificationManager.notify(i, notification)
+//        }
     }
 
 }
