@@ -1,7 +1,10 @@
 package yanshi.notificationKotlin
 
-//  Converted from java to kotlin by yanshiID from codinginflow.com
-//  https://www.youtube.com/playlist?list=PLrnPJCHvNZuCN52QwGu7YTSLIMrjCF0gM
+//  Converted from Java to Kotlin by yanshiID from codinginflow.com
+//  The playlist of this project on Java https://www.youtube.com/playlist?list=PLrnPJCHvNZuCN52QwGu7YTSLIMrjCF0gM
+//  cover.jpg is cover album by vickeblanka which the name of the album is wizard
+//  Photo by Red Zeppelin on Unsplash https://unsplash.com/photos/WeZ2yrYz8hQ
+//  Photo by Andrés Dallimonti on Unsplash https://unsplash.com/photos/h2wM8ZprLIQ
 
 import android.app.Notification
 import android.app.NotificationManager
@@ -19,6 +22,7 @@ import android.provider.Settings
 import android.support.v4.media.session.MediaSessionCompat
 import android.view.View
 import android.widget.EditText
+import android.widget.RemoteViews
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
@@ -26,6 +30,7 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.app.Person
 import androidx.core.app.RemoteInput
 import androidx.core.graphics.drawable.IconCompat
+import yanshi.notificationKotlin.App.statified.CHANNEL_10_ID
 import yanshi.notificationKotlin.App.statified.CHANNEL_1_ID
 import yanshi.notificationKotlin.App.statified.CHANNEL_2_ID
 import yanshi.notificationKotlin.App.statified.CHANNEL_3_ID
@@ -34,6 +39,7 @@ import yanshi.notificationKotlin.App.statified.CHANNEL_5_ID
 import yanshi.notificationKotlin.App.statified.CHANNEL_6_ID
 import yanshi.notificationKotlin.App.statified.CHANNEL_7_ID
 import yanshi.notificationKotlin.App.statified.CHANNEL_8_ID
+import yanshi.notificationKotlin.App.statified.CHANNEL_9_ID
 import yanshi.notificationKotlin.MainActivity.MES.MESSAGES
 import yanshi.notificationKotlin.MainActivity.MES.notificationManager
 import yanshi.notificationKotlin.MainActivity.MES.sendOnChannel5Notification
@@ -415,6 +421,32 @@ class MainActivity : AppCompatActivity() {
 //            Delete Group Channel
 //            manager.deleteNotificationChannelGroup(GROUP_1_ID)
         }
+    }
+    
+//    Custom Notification : https://www.youtube.com/watch?v=axcdnRAcqLw&list=PLrnPJCHvNZuCN52QwGu7YTSLIMrjCF0gM&index=11
+    fun showCustomNotification(v: View) {
+
+        val collapsedView = RemoteViews(packageName,
+            R.layout.custom_collapsed)
+        val expandedView = RemoteViews(packageName,
+            R.layout.custom_expanded)
+
+        val clickIntent = Intent(this, CustomReceiver::class.java)
+        val clickPendingIntent = PendingIntent.getBroadcast(this, 0, clickIntent, 0)
+
+        collapsedView.setTextViewText(R.id.text_view_collapsed_1, "Hello WRLD") // change text_view_collapsed_1 from custom_collapsed.xml
+
+        expandedView.setImageViewResource(R.id.image_view_expanded, R.drawable.red_zeppelin_unsplash) // change imageview
+        expandedView.setOnClickPendingIntent(R.id.image_view_expanded, clickPendingIntent)
+
+        val notification = NotificationCompat.Builder(this, CHANNEL_10_ID)
+            .setSmallIcon(R.drawable.ic_android)
+            .setCustomContentView(collapsedView)
+            .setCustomBigContentView(expandedView)
+//            .setStyle(NotificationCompat.DecoratedCustomViewStyle()) // uncomment to show app name
+            .build()
+
+        notificationManager.notify(10, notification)
     }
 
 }

@@ -74,7 +74,14 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Delete Channels"
+        android:text="Delete Channel 8"
         android:onClick="deleteNotificationChannels"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show Custom Notification"
+        android:onClick="showCustomNotification"
+        android:layout_gravity="center"/>
 
 </LinearLayout>

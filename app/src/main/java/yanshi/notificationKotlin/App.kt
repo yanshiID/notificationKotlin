@@ -6,6 +6,7 @@ import android.app.NotificationChannelGroup
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
+import yanshi.notificationKotlin.App.statified.CHANNEL_10_ID
 import yanshi.notificationKotlin.App.statified.CHANNEL_1_ID
 import yanshi.notificationKotlin.App.statified.CHANNEL_2_ID
 import yanshi.notificationKotlin.App.statified.CHANNEL_3_ID
@@ -32,6 +33,7 @@ class App : Application() {
         const val CHANNEL_7_ID = "channel7"
         const val CHANNEL_8_ID = "channel8"
         const val CHANNEL_9_ID = "channel9"
+        const val CHANNEL_10_ID = "channel10"
     }
 
     override fun onCreate() {
@@ -119,7 +121,7 @@ class App : Application() {
                 "Channel 8",
                 NotificationManager.IMPORTANCE_HIGH
             )
-            channel8.description = "This is channel 8"
+            channel8.description = "This is channel 8 this channel will be deleted by the delete channel button"
             channel8.group = GROUP_2_ID
 
 
@@ -130,6 +132,13 @@ class App : Application() {
                 NotificationManager.IMPORTANCE_LOW
             )
             channel9.description = "This is channel 9"
+
+            val channel10 = NotificationChannel(
+                CHANNEL_10_ID,
+                "Channel 10",
+                NotificationManager.IMPORTANCE_HIGH
+            )
+            channel10.description = "This is channel 10 which is a custom notification"
 
 
             val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -144,6 +153,7 @@ class App : Application() {
             manager.createNotificationChannel(channel7)
             manager.createNotificationChannel(channel8)
             manager.createNotificationChannel(channel9)
+            manager.createNotificationChannel(channel10)
         }
     }
 

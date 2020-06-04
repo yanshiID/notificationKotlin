@@ -18,6 +18,7 @@
             </intent-filter>
         </activity>
         <receiver android:name="yanshi.notificationKotlin.NotificationReceiver"/>
+        <receiver android:name=".CustomReceiver"/>
     </application>
 
 </manifest>
