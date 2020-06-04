@@ -7,11 +7,11 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "yanshi.NotificationKT"
+        applicationId "yanshi.notificationKotlin"
         minSdkVersion 23
         targetSdkVersion 29
         versionCode 1
-        versionName "1.0"
+        versionName "codinginflow.com"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

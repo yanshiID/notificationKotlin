@@ -1,4 +1,4 @@
-package yanshi.NotificationKT
+package yanshi.notificationKotlin
 
 //  Converted from java to kotlin by yanshiID from codinginflow.com
 //  https://www.youtube.com/playlist?list=PLrnPJCHvNZuCN52QwGu7YTSLIMrjCF0gM
@@ -26,21 +26,18 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.app.Person
 import androidx.core.app.RemoteInput
 import androidx.core.graphics.drawable.IconCompat
-import yanshi.NotificationKT.App.statified.CHANNEL_1_ID
-import yanshi.NotificationKT.App.statified.CHANNEL_2_ID
-import yanshi.NotificationKT.App.statified.CHANNEL_3_ID
-import yanshi.NotificationKT.App.statified.CHANNEL_4_ID
-import yanshi.NotificationKT.App.statified.CHANNEL_5_ID
-import yanshi.NotificationKT.App.statified.CHANNEL_6_ID
-import yanshi.NotificationKT.App.statified.CHANNEL_7_ID
-import yanshi.NotificationKT.App.statified.CHANNEL_8_ID
-import yanshi.NotificationKT.App.statified.CHANNEL_9_ID
-import yanshi.NotificationKT.App.statified.GROUP_1_ID
-import yanshi.NotificationKT.App.statified.GROUP_2_ID
-import yanshi.NotificationKT.MainActivity.MES.MESSAGES
-import yanshi.NotificationKT.MainActivity.MES.notificationManager
-import yanshi.NotificationKT.MainActivity.MES.sendOnChannel5Notification
-import yanshi.NotificationKT.Message.aob.Messages
+import yanshi.notificationKotlin.App.statified.CHANNEL_1_ID
+import yanshi.notificationKotlin.App.statified.CHANNEL_2_ID
+import yanshi.notificationKotlin.App.statified.CHANNEL_3_ID
+import yanshi.notificationKotlin.App.statified.CHANNEL_4_ID
+import yanshi.notificationKotlin.App.statified.CHANNEL_5_ID
+import yanshi.notificationKotlin.App.statified.CHANNEL_6_ID
+import yanshi.notificationKotlin.App.statified.CHANNEL_7_ID
+import yanshi.notificationKotlin.App.statified.CHANNEL_8_ID
+import yanshi.notificationKotlin.MainActivity.MES.MESSAGES
+import yanshi.notificationKotlin.MainActivity.MES.notificationManager
+import yanshi.notificationKotlin.MainActivity.MES.sendOnChannel5Notification
+import yanshi.notificationKotlin.Message.aob.Messages
 
 class MainActivity : AppCompatActivity() {
 

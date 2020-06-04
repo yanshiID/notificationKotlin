@@ -1,8 +1,8 @@
-package yanshi.NotificationKT
+package yanshi.notificationKotlin
 
-import yanshi.NotificationKT.Message.aob.sender
-import yanshi.NotificationKT.Message.aob.text
-import yanshi.NotificationKT.Message.aob.timestamp
+import yanshi.notificationKotlin.Message.aob.sender
+import yanshi.notificationKotlin.Message.aob.text
+import yanshi.notificationKotlin.Message.aob.timestamp
 
 class Message {
 

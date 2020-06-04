@@ -1,4 +1,4 @@
-package yanshi.NotificationKT
+package yanshi.notificationKotlin
 
 import org.junit.Test
 

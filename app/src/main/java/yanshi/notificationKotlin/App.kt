@@ -1,4 +1,4 @@
-package yanshi.NotificationKT
+package yanshi.notificationKotlin
 
 import android.app.Application
 import android.app.NotificationChannel
@@ -6,17 +6,17 @@ import android.app.NotificationChannelGroup
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
-import yanshi.NotificationKT.App.statified.CHANNEL_1_ID
-import yanshi.NotificationKT.App.statified.CHANNEL_2_ID
-import yanshi.NotificationKT.App.statified.CHANNEL_3_ID
-import yanshi.NotificationKT.App.statified.CHANNEL_4_ID
-import yanshi.NotificationKT.App.statified.CHANNEL_5_ID
-import yanshi.NotificationKT.App.statified.CHANNEL_6_ID
-import yanshi.NotificationKT.App.statified.CHANNEL_7_ID
-import yanshi.NotificationKT.App.statified.CHANNEL_8_ID
-import yanshi.NotificationKT.App.statified.CHANNEL_9_ID
-import yanshi.NotificationKT.App.statified.GROUP_1_ID
-import yanshi.NotificationKT.App.statified.GROUP_2_ID
+import yanshi.notificationKotlin.App.statified.CHANNEL_1_ID
+import yanshi.notificationKotlin.App.statified.CHANNEL_2_ID
+import yanshi.notificationKotlin.App.statified.CHANNEL_3_ID
+import yanshi.notificationKotlin.App.statified.CHANNEL_4_ID
+import yanshi.notificationKotlin.App.statified.CHANNEL_5_ID
+import yanshi.notificationKotlin.App.statified.CHANNEL_6_ID
+import yanshi.notificationKotlin.App.statified.CHANNEL_7_ID
+import yanshi.notificationKotlin.App.statified.CHANNEL_8_ID
+import yanshi.notificationKotlin.App.statified.CHANNEL_9_ID
+import yanshi.notificationKotlin.App.statified.GROUP_1_ID
+import yanshi.notificationKotlin.App.statified.GROUP_2_ID
 
 class App : Application() {
 
