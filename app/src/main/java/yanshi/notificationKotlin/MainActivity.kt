@@ -436,7 +436,7 @@ class MainActivity : AppCompatActivity() {
 
         collapsedView.setTextViewText(R.id.text_view_collapsed_1, "Hello WRLD") // change text_view_collapsed_1 from custom_collapsed.xml
 
-        expandedView.setImageViewResource(R.id.image_view_expanded, R.drawable.red_zeppelin_unsplash) // change imageview
+        expandedView.setImageViewResource(R.id.image_view_expanded, R.drawable.red_zeppelin_unsplash) // change image_view_expanded from custom_expanded
         expandedView.setOnClickPendingIntent(R.id.image_view_expanded, clickPendingIntent)
 
         val notification = NotificationCompat.Builder(this, CHANNEL_10_ID)
