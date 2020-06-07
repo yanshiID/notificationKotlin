@@ -5,9 +5,9 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.core.app.RemoteInput
-import yanshi.notificationKotlin.MainActivity.MES.MESSAGES
-import yanshi.notificationKotlin.MainActivity.MES.sendOnChannel5Notification
-import yanshi.notificationKotlin.Message.aob.Messages
+import yanshi.notificationKotlin.MainActivity.MaOb.MESSAGES
+import yanshi.notificationKotlin.MainActivity.MaOb.sendOnChannel5Notification
+import yanshi.notificationKotlin.Message.MessOb.Messages
 
 class DirectReplyReceiver : BroadcastReceiver() {
 

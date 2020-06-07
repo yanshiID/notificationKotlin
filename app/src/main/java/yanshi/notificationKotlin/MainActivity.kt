@@ -1,10 +1,14 @@
 package yanshi.notificationKotlin
 
-//  Converted from Java to Kotlin by yanshiID from codinginflow.com
-//  The playlist of this project on Java https://www.youtube.com/playlist?list=PLrnPJCHvNZuCN52QwGu7YTSLIMrjCF0gM
-//  cover.jpg is cover album by vickeblanka which the name of the album is wizard
-//  Photo by Red Zeppelin on Unsplash https://unsplash.com/photos/WeZ2yrYz8hQ
-//  Photo by Andrés Dallimonti on Unsplash https://unsplash.com/photos/h2wM8ZprLIQ
+//  Converted from Java to Kotlin by yanshiID from codinginflow's tutorials
+//  Watch the whole playlist of the tutorials : https://www.youtube.com/playlist?list=PLrnPJCHvNZuCN52QwGu7YTSLIMrjCF0gM
+//  Part 1 of the project from codinginflow's site : https://codinginflow.com/tutorials/android/notifications-notification-channels/part-1-notification-channels
+
+//  cover.jpg is cover album by Vickeblanka which the name of the album is wizard
+
+//  Photo by Red Zeppelin on Unsplash : https://unsplash.com/photos/WeZ2yrYz8hQ
+//  and
+//  Andrés Dallimonti on Unsplash : https://unsplash.com/photos/h2wM8ZprLIQ
 
 import android.app.Notification
 import android.app.NotificationManager
@@ -40,10 +44,10 @@ import yanshi.notificationKotlin.App.statified.CHANNEL_6_ID
 import yanshi.notificationKotlin.App.statified.CHANNEL_7_ID
 import yanshi.notificationKotlin.App.statified.CHANNEL_8_ID
 import yanshi.notificationKotlin.App.statified.CHANNEL_9_ID
-import yanshi.notificationKotlin.MainActivity.MES.MESSAGES
-import yanshi.notificationKotlin.MainActivity.MES.notificationManager
-import yanshi.notificationKotlin.MainActivity.MES.sendOnChannel5Notification
-import yanshi.notificationKotlin.Message.aob.Messages
+import yanshi.notificationKotlin.MainActivity.MaOb.MESSAGES
+import yanshi.notificationKotlin.MainActivity.MaOb.notificationManager
+import yanshi.notificationKotlin.MainActivity.MaOb.sendOnChannel5Notification
+import yanshi.notificationKotlin.Message.MessOb.Messages
 
 class MainActivity : AppCompatActivity() {
 
@@ -52,11 +56,11 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var mediaSession: MediaSessionCompat
 
-    object MES{
+    object MaOb{
 
         lateinit var notificationManager: NotificationManagerCompat
 
-        val MESSAGES : MutableList<Message> = ArrayList()
+        val MESSAGES = arrayListOf<Message>()
 
 //        MessagingStyle : https://www.youtube.com/watch?v=DsFYPTnCbs8&list=PLrnPJCHvNZuCN52QwGu7YTSLIMrjCF0gM&index=5
 //      error on looping
@@ -97,7 +101,7 @@ class MainActivity : AppCompatActivity() {
             messagingStyle.isGroupConversation = true
             messagingStyle.conversationTitle = "Group Chat"
 
-            for (chatMessage : Message in MESSAGES) {
+            for (chatMessage in MESSAGES) {
                 val notificationMessage : NotificationCompat.MessagingStyle.Message =
                     NotificationCompat.MessagingStyle.Message(
                         chatMessage.getText(),
@@ -106,6 +110,11 @@ class MainActivity : AppCompatActivity() {
                     )
                 messagingStyle.addMessage(notificationMessage)
             }
+
+//            val notificationMessage = NotificationCompat.MessagingStyle.Message("Hello", System.currentTimeMillis(), "You")
+//            val notificationMessages = NotificationCompat.MessagingStyle.Message("Helloo", System.currentTimeMillis(), "Youu")
+//            messagingStyle.addMessage(notificationMessage)
+//            messagingStyle.addMessage(notificationMessages)
 
             val notification : Notification = NotificationCompat.Builder(context, CHANNEL_5_ID)
                 .setSmallIcon(R.drawable.ic_five)

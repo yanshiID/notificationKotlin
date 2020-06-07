@@ -1,12 +1,12 @@
 package yanshi.notificationKotlin
 
-import yanshi.notificationKotlin.Message.aob.sender
-import yanshi.notificationKotlin.Message.aob.text
-import yanshi.notificationKotlin.Message.aob.timestamp
+import yanshi.notificationKotlin.Message.MessOb.sender
+import yanshi.notificationKotlin.Message.MessOb.text
+import yanshi.notificationKotlin.Message.MessOb.timestamp
 
 class Message {
 
-    object aob {
+    object MessOb {
 
         var text : CharSequence? = null
         var timestamp: Long? = null
