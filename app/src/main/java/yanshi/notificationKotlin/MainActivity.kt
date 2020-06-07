@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
 
         lateinit var notificationManager: NotificationManagerCompat
 
-        val MESSAGES = arrayListOf<Message>()
+        val MESSAGES = ArrayList<Message>()
 
 //        MessagingStyle : https://www.youtube.com/watch?v=DsFYPTnCbs8&list=PLrnPJCHvNZuCN52QwGu7YTSLIMrjCF0gM&index=5
 //      error on looping
@@ -102,7 +102,7 @@ class MainActivity : AppCompatActivity() {
             messagingStyle.conversationTitle = "Group Chat"
 
             for (chatMessage in MESSAGES) {
-                val notificationMessage : NotificationCompat.MessagingStyle.Message =
+                val notificationMessage =
                     NotificationCompat.MessagingStyle.Message(
                         chatMessage.getText(),
                         chatMessage.getTimeStamp()!!,
@@ -110,11 +110,6 @@ class MainActivity : AppCompatActivity() {
                     )
                 messagingStyle.addMessage(notificationMessage)
             }
-
-//            val notificationMessage = NotificationCompat.MessagingStyle.Message("Hello", System.currentTimeMillis(), "You")
-//            val notificationMessages = NotificationCompat.MessagingStyle.Message("Helloo", System.currentTimeMillis(), "Youu")
-//            messagingStyle.addMessage(notificationMessage)
-//            messagingStyle.addMessage(notificationMessages)
 
             val notification : Notification = NotificationCompat.Builder(context, CHANNEL_5_ID)
                 .setSmallIcon(R.drawable.ic_five)
